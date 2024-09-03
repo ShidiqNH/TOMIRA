@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOMIRA</title>
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/css/tabler.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --body-color: #E4E9F7;
+            --sidebar-color: #FFF;
+            --primary-color: #695CFE;
+            --primary-color-light: #F6F5FF;
+            --toggle-color: #DDD;
+            --text-color: #707070;
+        }
+        body {
+            min-height: 100vh;
+            background-color: var(--body-color);
+            transition: all 0.3s ease;
+            background-image: url('/statImage/background-pattern.jpg');
+        }
+		.menu-bar {
+		    margin-top: 20px; /* Add top margin */
+		}
+		
+		.sidebar {
+		    position: fixed;
+		    top: 0;
+		    left: 0;
+		    height: 100%;
+		    width: 250px;
+		    background: var(--sidebar-color);
+		    z-index: 100;
+		    padding-top:50px;
+		    padding-left: 50px; /* Add left padding */
+		    box-sizing: border-box; /* Ensure padding is included in width */
+		}
+
+
+        .sidebar li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .sidebar .text {
+            font-size: 17px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 1;
+        }
+        .home {
+            position: absolute;
+            top: 0;
+            left: 250px;
+            height: 100vh;
+            width: calc(100% - 250px);
+            background-color: var(--body-color);
+            transition: all 0.3s ease;
+        }
+        .container-fluid {
+            max-width: 1500px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<nav class="sidebar">
+    <header>
+        <div class="image-text">
+            <span class="image">
+                <!--<img src="logo.png" alt="">-->
+            </span>
+            <div class="text logo-text">
+                <span class="name">Admin</span>
+                <span class="profession">Panel</span>
+            </div>
+        </div>
+    </header>
+    <div class="menu-bar">
+        <div class="menu">
+            <li class="search-box">
+                <i class='bx bx-search icon'></i>
+                <span class="text options">Options</span>
+            </li>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a href="/products">
+                        <i class='bx bx-home-alt icon'></i>
+                        <span class="text nav-text">Product</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/users">
+                        <i class='bx bx-bar-chart-alt-2 icon'></i>
+                        <span class="text nav-text">Account</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/transactions/index">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text" >Transaction</span>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="/contacts/contactMessages">
+                        <i class='bx bx-bell icon'></i>
+                        <span class="text nav-text">Messages</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <li>
+                <a href="/">
+                    <i class='bx bx-log-out icon'></i>
+                    <span class="text nav-text">Logout</span>
+                </a>
+            </li>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid p-4">
+    <h1 class="text-center my-4">TOMIRA</h1>
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Products</h2>
+        <a class="btn btn-success" th:href="@{/products/create}">Create Product</a>
+    </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Created At</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.category}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td id="price-${product.id}" th:text="${product.price}"></td>
+                <!-- Make sure the path is relative to the context path -->
+                <td>
+                    <img th:src="@{'/images/' + ${product.imageFileName}}"
+                         alt="..." width="100">
+                </td>
+                <td th:text="${product.createdAt.toString().substring(0, 10)}"></td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm"
+                       th:href="@{/products/edit(id=${product.id})}">Edit</a>
+                    <a class="btn btn-danger btn-sm"
+                       th:href="@{/products/delete(id=${product.id})}"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tabler/core@latest/dist/js/tabler.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('td[id^="price-"]').forEach(function(td) {
+            let price = parseFloat(td.textContent);
+            td.textContent = 'Rp. ' + price.toLocaleString('id-ID', { minimumFractionDigits: 0 });
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+        });
+    });
+    const body = document.querySelector('body'),
+        sidebar = body.querySelector('nav'),
+        toggle = body.querySelector(".toggle"),
+        searchBtn = body.querySelector(".search-box"),
+        modeSwitch = body.querySelector(".toggle-switch"),
+        modeText = body.querySelector(".mode-text");
+    toggle.addEventListener("click" , () =>{
+        sidebar.classList.toggle("close");
+    })
+    searchBtn.addEventListener("click" , () =>{
+        sidebar.classList.remove("close");
+    })
+    modeSwitch.addEventListener("click" , () =>{
+        body.classList.toggle("dark");
+
+        if(body.classList.contains("dark")){
+            modeText.innerText = "Light mode";
+        }else{
+            modeText.innerText = "Dark mode";
+
+        }
+    });
+</script>
+</body>
+</html>
+                            

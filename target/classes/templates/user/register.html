@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+   <style>
+        body {
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: normal;
+            background: #f8f9fd;
+            color: rgba(0, 0, 0, 0.5);
+            display: flex; /* Make body a flex container */
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            height: 100vh; /* Full height of the viewport */
+        }
+
+        a {
+            transition: .3s all ease;
+            color: #e3b04b;
+        }
+
+        a:hover, a:focus {
+            text-decoration: none !important;
+            outline: none !important;
+            box-shadow: none;
+        }
+
+        h3 {
+            color: #000;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+		.container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .img {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .wrap {
+            width: 100%;
+            display: flex;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+        }
+
+        .img {
+            width: 50%;
+            background-image: url('background.jpg'); /* Use the correct image URL here */
+        }
+
+		.login-wrap {
+            width: 500px; /* Adjust the width here */
+            padding: 30px;
+            /* Other styles... */
+        }
+
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-control {
+            height: 48px;
+            background: #fff;
+            color: #000;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, .1);
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .form-control::placeholder {
+            color: rgba(0, 0, 0, .2) !important;
+        }
+
+        .form-control:focus, .form-control:active {
+            outline: none !important;
+            border: 1px solid #e3b04b;
+        }
+
+        .checkbox-wrap {
+            display: block;
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .checkbox-wrap input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        .checkbox-wrap input:checked ~ .checkmark {
+            background-color: #e3b04b;
+        }
+
+        .checkbox-wrap .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-wrap input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-wrap .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        .btn {
+            cursor: pointer;
+            box-shadow: none !important;
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        .btn:hover, .btn:active, .btn:focus {
+            outline: none;
+        }
+
+        .btn-primary {
+            background: #e3b04b !important;
+            border: 1px solid #e3b04b !important;
+            color: #fff !important;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            border: 1px solid #e3b04b;
+            background: transparent;
+            color: #e3b04b;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .forgot-password {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 14px;
+            float: right;
+        }
+
+        .signup-link {
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<section class="ftco-section">
+    <div class="container">
+        <div class="wrap d-md-flex">
+            <div class="img" style="background-image: url('statImage/Background.jpg');"></div>
+            <div class="login-wrap p-4 p-md-5">
+                <div class="d-flex">
+                    <div class="w-100">
+                        <h3 class="mb-4">Sign Up</h3>
+                    </div>
+                </div>
+                <form action="/register" class="signin-form">
+                    <div class="form-group mb-3">
+                        <label class="label" for="fullname">Full Name</label>
+                        <input type="text" style="width:100%;" id="fullname" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="email">Email</label>
+                        <input type="email" style="width:100%;" id="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="username">Username</label>
+                        <input type="text" style="width:100%;" id="username" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="label" for="password">Password</label>
+                        <input type="password" style="width:100%;" id="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" style="width:100%;" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+                    </div>
+                </form>
+                <p class="text-center">Have an account? <a href="/login" class="signup-link">Login</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".signin-form");
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const fullName = form.querySelector("#fullname").value;
+        const email = form.querySelector("#email").value;
+        const username = form.querySelector("#username").value;
+        const password = form.querySelector("#password").value;
+
+        if (fullName && email && username && password) {
+            // Check if the username already exists
+            fetch(`/auth/checkUsername?username=${username}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.exists) {
+                        alert("Username already exists. Please choose a different one.");
+                    } else {
+                        // Prepare the form data
+                        const formData = new FormData();
+                        formData.append("fullname", fullName);
+                        formData.append("email", email);
+                        formData.append("username", username);
+                        formData.append("password", password);
+
+                        // Send an AJAX request to the server
+                        fetch("/auth/register", {
+                            method: "POST",
+                            body: formData
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log("Registration successful");
+                                alert("Registration successful");
+                                // Optionally, redirect the user to another page
+                                window.location.href = "/login";
+                            } else {
+                                response.text().then(text => {
+                                    console.error("Registration failed:", text);
+                                    alert("Registration failed: " + text);
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            console.error("Error:", error);
+                            alert("An error occurred");
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Error checking username:", error);
+                    alert("An error occurred while checking the username");
+                });
+        } else {
+            alert("Please fill in all fields");
+        }
+    });
+});
+
+
+
+</script>
+</body>
+</html>

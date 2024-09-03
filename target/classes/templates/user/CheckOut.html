@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+        }
+        
+        header {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            margin: 0;
+            color: #f36c00;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .checkout-form, .order-summary {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        
+        .checkout-form {
+            width: 60%;
+            margin-right: 20px;
+        }
+        
+        .order-summary {
+            width: 35%;
+            background-color: #fdf2e9;
+        }
+        
+        h1 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .summary-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        
+        .checkout-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f36c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .checkout-button:hover {
+            background-color: #d85a00;
+        }
+        
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .payment-options button {
+            flex: 1;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .payment-options button:last-child {
+            margin-right: 0;
+        }
+        
+        .payment-options button img {
+            width: 100%;
+            height: auto;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TOMIRA</h1>
+    </header>
+    <div class="container">
+        <div class="checkout-form">
+            <h1>Konfirmasi Pemesanan</h1>
+            <form action="/submit_order" method="POST">
+            	<div class="form-group">
+				    <label>Username</label>
+				    <input type="username" id="username" name="username" required>
+				</div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat penerima</label>
+                    <input type="text" id="alamat" name="alamat" required>
+                </div>
+                <div class="form-group">
+                    <label for="kota">Kota</label>
+                    <input type="text" id="kota" name="kota" required>
+                </div>
+                <div class="form-group">
+                    <label for="kode_pos">Kode pos</label>
+                    <input type="text" id="kode_pos" name="kode_pos" required>
+                </div>
+		        <div class="order-summary">
+		            <h1>Informasi Pemesanan</h1>
+						  <p th:text="${product.name}"></p>
+		                  <p>Total Price: <span id="totalPriceDisplay"></span></p>
+		            <p>quantity   : <span id="quantityDisplay"></span></p>
+		            <input type="hidden" id="productIdInput" name="productId" th:value="${product.id}" />
+		            <input type="hidden" id="totalPriceInput" name="totalPrice" value="">
+      			  </div>
+                <button type="submit" class="checkout-button">Complete Order</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Ambil total price dari localStorage
+        var totalPrice = localStorage.getItem('totalPrice');
+        var quantity = localStorage.getItem('quantity');
+
+        // Tampilkan nilai totalPrice dalam elemen HTML
+        document.getElementById('totalPriceDisplay').innerText = totalPrice ? 'Rp. ' + totalPrice : 'Belum ada total price.';
+        document.getElementById('quantityDisplay').innerText = quantity ? + quantity : 'Belum ada quantity.';
+    </script>
+</body>
+</html>
